@@ -82,7 +82,15 @@ app.get("user/:id", (req, res) => {
 
 app.post("/user/:id", bodyParser, updateUser);
 
-// app.delete()
+app.delete("/user/:id", (req, res) => {
+  const { id } = req.params;
+  const userList = USERS.users;
+  console.log(id);
+  const index = userList.findIndex(u => u.id === id);
+  userList.splice(index, 1);
+
+  res.status(204).end();
+});
 
 app.listen(8080, function() {
   console.log("Example app listening on port 8080!");
